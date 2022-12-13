@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Drag and Drop Text File</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+      #drop-zone {
+        border: 2px dashed #ccc;
+        border-radius: 20px;
+        width: 200px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #drop-zone p {
+        font-size: 16px;
+        text-align: center;
+      }
+    </style>
+
+    <!-- <script src="drag-and-drop.js"></script> -->
+  </head>
+  <body>
+    <h1>Drag and Drop Text File</h1>
+    <p>Drag and drop a text file into the box below:</p>
+
+    <div id="drop-zone" class="mb-3">
+      <p>Drop your file here</p>
+    </div>
+
+    <textarea id="bruh" class="form-control"></textarea>
+
+  </body>
+</html>

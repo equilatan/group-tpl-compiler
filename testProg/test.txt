@@ -1,0 +1,3 @@
+int asd;
+String sd;
+double asd;

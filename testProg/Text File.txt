@@ -1,0 +1,9 @@
+public class Main {
+  public static void main(String[] args) {
+    String str = "Hello world!";
+    int x = 10;
+    double y = 5.5;
+    int sum = x + y;
+    System.out.println(str + " The value of x is " + x + ", the value of y is " + y + ", and the sum of x and y is " + sum + ".");
+  }
+}

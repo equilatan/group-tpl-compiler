@@ -1,0 +1,66 @@
+button:enabled {
+  background-color: transparent;
+  color: white;
+  border-color: white;
+  border-radius: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+button:disabled {
+  background-color: dark;
+  color: gray;
+  border-color: dark;
+}
+
+#output {
+  height: 200px;
+  background-color: black;
+  color: white;
+  font-family: courier;
+}
+
+#drop-zone {
+  border: 2px dashed #ccc;
+  background-color: darkgrey;
+  border-radius: 20px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#drop-zone p {
+  font-size: 16px;
+  text-align: center;
+}
+
+#drop-zone i {
+  font-size: 25px;
+  color: white;
+}
+
+@media (max-width: 992px) {
+  .col-3 {
+    float: none; /* don't float the sidebar on small screens */
+    width: 100%; /* make the sidebar occupy the full width of the screen */
+  }
+  
+  .col-9 {
+    float: none; /* don't float the second column on small screens */
+    width: 100%; /* make the second column occupy the full width of the screen */
+  }
+}
+
+h1.font-weight-bold {
+  font-size: 24px; /* set the font size of the heading */
+}
+
+#drop-zone {
+  min-height: 50px; /* set the minimum height of the drop zone */
+  margin: 10px;
+}
+
+#file-input{
+  margin: 30px;
+}
