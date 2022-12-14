@@ -32,39 +32,41 @@
             <label class="custom-file-label bg-dark text-white" for="file-input">*.txt</label>
             <p class="text-center text-muted">or drop a file here:</p>
           </div>
-          <script src = "fileInput.js"></script>
+          <script src = "js-functions/fileInput.js"></script>
           <!-- container for the file drop zone -->
           
            <div id="drop-zone" >
             <p class="text-white"><i class="fas fa-upload"></i></p>
             
           </div> 
-          <script src="drag-and-drop.js"></script> 
+          <script src="js-functions/drag-and-drop.js"></script> 
         </div>
 
 
 
         <!-- container for the right column -->
         <div class="col-9 p-0 m-0">
-          <form>
-            <!-- container for the code editor -->
-            <div class="form-group mb-0">
-              <div class="w-100 p-0 m-0" id="input-editor">
+          <!-- container for the code editor -->
+          <div class="form-group mb-0">
+            <div class="w-100 p-0 m-0" id="input-editor">
 
-              </div>
-              <script src = "codemir.js"></script>
             </div>
-            <!-- container for the compiler buttons -->
-            <div class="form-group mb-0">
-              <button type="button" class="btn btn-primary" id="lexical" onclick="lexical2()">Lexical</button>
-              <button type="button" class="btn btn-secondary" id="syntax" disabled onclick="syntax_declaration()">Syntax</button>
-              <button type="button" class="btn btn-secondary" id="semantic" disabled>Semantic</button>
-            </div>
-            <!-- container for the output textarea -->
-            <div class="form-group mb-0 h-100">
-              <textarea class="form-control w-100 p-0 m-0" id="output" readonly></textarea>
-            </div>
-          </form>
+            <script src = "js-functions/codemir.js"></script>
+          </div>
+          <!-- container for the compiler buttons -->
+          <div class="form-group mb-0">
+            <button type="button" class="btn btn-primary" id="lexical" onclick="lexical()">Lexical</button>
+            <button type="button" class="btn btn-secondary" id="syntax" disabled onclick="syntax_declaration()">Syntax</button>
+            <button type="button" class="btn btn-secondary" id="semantic" disabled>Semantic</button>
+            <!-- <button type="button" class="btn btn-secondary" id="test" onclick="test()">test</button> -->
+          </div>
+          <!-- container for the output textarea -->
+          <!-- <div class="form-group mb-0 h-100">
+            <textarea class="form-control w-100 p-0 m-0" id="output" readonly></textarea>
+          </div>  -->
+      
+
+          <textarea readonly id="output" class="form-control" rows="10" cols="50" style="resize: none; overflow:scroll; overflow-x:hidden;"></textarea>
         </div>
       </div>
     </div>
@@ -76,10 +78,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.1/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   
-    <script src="lexical.js"></script>
-    <script src="lexical-general.js"></script>
-    <script src="syntax.js"></script>
-    <script src="semantic.js"></script>
+    <script src="js-functions/lexical.js"></script>
+    <script src="js-functions/syntax.js"></script>
+    <script src="js-functions/semantic.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
 
   </body>
