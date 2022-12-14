@@ -55,10 +55,17 @@
           </div>
           <!-- container for the compiler buttons -->
           <div class="form-group mb-0">
-            <button type="button" class="btn btn-primary" id="lexical" onclick="lexical()">Lexical</button>
-            <button type="button" class="btn btn-secondary" id="syntax" disabled onclick="syntax_declaration()">Syntax</button>
+            <button type="button" class="btn btn-primary" id="lexical" onclick="try2()">Lexical</button>
+            <button type="button" class="btn btn-secondary" id="syntax" disabled onclick="syntax()">Syntax</button>
             <button type="button" class="btn btn-secondary" id="semantic" disabled>Semantic</button>
-            <!-- <button type="button" class="btn btn-secondary" id="test" onclick="test()">test</button> -->
+            <button type="button" class="btn btn-secondary" id="test" onclick="test()">test</button>
+            <script>
+              function test(){
+                let s = getExpression();
+              document.getElementById("output").innerHTML = s;
+              }
+              
+            </script>
           </div>
           <!-- container for the output textarea -->
           <!-- <div class="form-group mb-0 h-100">
@@ -66,7 +73,7 @@
           </div>  -->
       
 
-          <textarea readonly id="output" class="form-control" rows="10" cols="50" style="resize: none; overflow:scroll; overflow-x:hidden;"></textarea>
+          <textarea readonly id="output" class="form-control" rows="10" cols="50" style="resize: vertical; overflow:scroll; overflow-x:hidden;"></textarea>
         </div>
       </div>
     </div>

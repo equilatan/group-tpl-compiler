@@ -1,63 +1,51 @@
 
+function syntax(){
 
-function syntax_declaration(){
+    // var outputTemp = ""; 
+    // var ctr = 1;
     
-    let i = 0;
-    let pattern_1 = ['<data_type>','<identifier>','<delimiter>'];
-    let pattern_2 = ['<data_type>','<identifier>','<assignment_operator>','<value>'];
-    let pattern_3 = ['<value>', '<arithmetic_operator>'];
-    let valueChk = '';
-    let syntaxChk = true;
-    if(!token_arr.includes("<delimiter>")){
-        wrongSyntax("Error: Missing ';' at the end of the statement.");
+
+    // let rbrace_ctr = 0;
+    // let lbrace_ctr = 0;
+
+    // for(let i = 0 ; i < tokenDictGlobal.length ; i++){
+
+    //     let currentToken = tokenDictGlobal[i];
+
+    //     if(currentToken == "<left_brace_delimiter>") lbrace_ctr++;
+    //     else if(currentToken == "<right_brace_delimiter>") rbrace_ctr++;
+
+    // }
+
+    // if(lbrace_ctr != rbrace_ctr){
+
+    //     if(lbrace_ctr > rbrace_ctr)
+    //         print("Syntax Error: Missing '{' at the end of the statement.");
+    //     else
+    //         print("Syntax Error: Extra '}' at the end of the statement.")
+    // }
+    outTemp = "";
+    for(lol in tokenDictGlobal){
+        outTemp += (tokenDictGlobal[lol] + "\n");
     }
-    else{
-        for(let i = 0; token_arr[i]!="<delimiter>"; i++){
-
-            if(!(token_arr[i] == pattern_1[i] || token_arr[i] == pattern_2[i] || token_arr[i] == valueChk)){
-                wrongSyntax("Syntax Error!");
-                syntaxChk = false;
-                break;
-            }
-
-            if(token_arr[i] == "<value>"){
-                valueChk = '<arithmetic_operator>';
-            }
-            else if(token_arr[i] == '<arithmetic_operator>'){
-                valueChk = '<value>';
-            }
-
-        }
-        if(syntaxChk==true){
-            printSyntax("Syntax is Correct!"); 
-            enableSemantic();
-        } 
-
-        }
-    }
+    print2(outTemp);
     
-    
-
-
-function wrongSyntax(s){
-    
-    document.getElementById("output").textContent = s;
-    var button = document.getElementById('syntax');
-    var sembutton = document.getElementById('semantic');
-    button.disabled = true;
-    sembutton.disabled = true;
+        
 }
 
-function printSyntax(s){
-    document.getElementById("output").textContent = s;
-}
 
-function enableSemantic(){
 
-    var button = document.getElementById('semantic');
-    var lexbutton = document.getElementById('syntax');
-    button.disabled = false;
-    lexbutton.style.backgroundColor = "#5cb85c"; //#5cb85c for green // #d9534f for red
-    lexbutton.style.color = "black";
+
+function print2(s){
+    //document.getElementById("output").textContent += s;
+    document.getElementById("output").innerHTML = s;
+    document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
+
+    // if(s != ""){
+    //     document.getElementById("syntax").disabled = false;
+    //     document.getElementById("lexical").style.backgroundColor = "#32CD32";
+    //     document.getElementById("lexical").style.color = black;
+
+    // }
     
 }
