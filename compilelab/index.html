@@ -28,8 +28,8 @@
         
           <!-- custom file input -->
           <div class="custom-file">
-            <input type="file" id="file-input" class="custom-file-input form-control-file" accept=".txt">
-            <label class="custom-file-label bg-dark text-white" for="file-input">*.txt</label>
+            <input type="file" id="file-input" class="custom-file-input form-control-file" accept=".java">
+            <label class="custom-file-label bg-dark text-white" for="file-input">*.java</label>
             <p class="text-center text-muted">or drop a file here:</p>
           </div>
           <script src = "js-functions/fileInput.js"></script>
@@ -42,10 +42,30 @@
           <script src="js-functions/drag-and-drop.js"></script> 
         </div>
 
+        
 
 
         <!-- container for the right column -->
-        <div class="col-9 p-0 m-0">
+        <div class="col-9 p-0 m-0" >
+          <!-- Create a new div to display the file name -->
+          <div id="file-name-display" class="bg-secondary text-light px-3 py-2 d-flex align-items-center"></div>
+          <script>
+            // Get a reference to the input field and the div
+            var inputField = document.getElementById("file-input");
+            var displayDiv = document.getElementById("file-name-display");
+
+            // Listen for changes to the input field
+            inputField.addEventListener("change", function() {
+              // Get the selected file
+              var file = this.files[0];
+
+              // Update the div with the file name
+              displayDiv.innerHTML = file.name;
+            });
+          </script>
+
+
+
           <!-- container for the code editor -->
           <div class="form-group mb-0">
             <div class="w-100 p-0 m-0" id="input-editor">
@@ -66,6 +86,13 @@
               }
               
             </script>
+
+            <!-- Create a button to save the text -->
+            <button type="button" class="btn btn-secondary"  id="save-button">Save</button>
+
+            <script src = "js-functions/fileSaver.js"></script>
+
+
           </div>
           <!-- container for the output textarea -->
           <!-- <div class="form-group mb-0 h-100">

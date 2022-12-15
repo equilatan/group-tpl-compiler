@@ -1,34 +1,47 @@
 
 function syntax(){
 
-    // var outputTemp = ""; 
-    // var ctr = 1;
-    
+    var outputTemp = "";
+    let currentLine = 0;
+    let rbrace_ctr = 0;
+    let lbrace_ctr = 0;
+    outTemp="";
+    errorChk = false;
 
-    // let rbrace_ctr = 0;
-    // let lbrace_ctr = 0;
+    var length = Object.keys(tokenDictGlobal).length;
+   
+    for(let i = 0 ; i < length ; i++){
 
-    // for(let i = 0 ; i < tokenDictGlobal.length ; i++){
+        currentLine = (i+1);
+        // outTemp += currentLine;
+        for(let j = 0 ; j < tokenDictGlobal[i].length ; j++){
 
-    //     let currentToken = tokenDictGlobal[i];
+            let currentToken = tokenDictGlobal[i][j];
+            if(currentToken == "<left_brace_delimiter>"){
+                lbrace_ctr++;
+            } 
+            else if(currentToken == "<right_brace_delimiter>"){
+                rbrace_ctr++;
 
-    //     if(currentToken == "<left_brace_delimiter>") lbrace_ctr++;
-    //     else if(currentToken == "<right_brace_delimiter>") rbrace_ctr++;
+                if(rbrace_ctr > lbrace_ctr){
+                    errorChk = true;
+                    print2("Syntax Error: Extra '}' at the end of the statement." + "\nat line " + currentLine)
+                }
+            } 
+        }
+        
+        if(errorChk == false)
+            print2("Syntax is Correct!");
 
-    // }
 
-    // if(lbrace_ctr != rbrace_ctr){
-
-    //     if(lbrace_ctr > rbrace_ctr)
-    //         print("Syntax Error: Missing '{' at the end of the statement.");
-    //     else
-    //         print("Syntax Error: Extra '}' at the end of the statement.")
-    // }
-    outTemp = "";
-    for(lol in tokenDictGlobal){
-        outTemp += (tokenDictGlobal[lol] + "\n");
     }
-    print2(outTemp);
+
+
+    // outTemp = "";
+    // for(lol in tokenDictGlobal){
+    //     outTemp += (tokenDictGlobal[lol] + "\n");
+    // }
+    // print2(outTemp);
     
         
 }

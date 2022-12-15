@@ -273,7 +273,11 @@ function try2(){
         lexemes[i] = lexical2(trimmedLines[i]).filter(str => str !== "");
         tokens[i] = getTokens2(lexemes[i]).filter(str => str !== "");
     
-         outTemp += ("The line is " + (i+1) + "\n" + lexemes[i] + "\n" + tokens[i] + "\n\n\n");
+         //outTemp += ("The line is " + (i+1) + "\n" + lexemes[i] + "\n" + tokens[i] + "\n\n\n");
+         for(let j = 0; j < lexemes[i].length ; j++){
+            outTemp += ("(" + (i+1) + ") >>> " + lexemes[i][j] + " >>> " + tokens[i][j] + "\n");
+         }
+         
     }
     // something wrong with lexemes
     lexemeDictGlobal = lexemes;
