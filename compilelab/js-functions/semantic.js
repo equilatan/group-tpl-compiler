@@ -50,7 +50,10 @@ function checkValue(dataType, value) {
       isValid = /^\d+(\.\d+)?$/.test(value);
       break;
     case "String":
-      isValid = typeof value === "string";
+      isValid = /^"([^"]*)"$/.test(value);
+      break;
+    case "char":
+      isValid = /^'([^']?)'$/.test(value);
       break;
     default:
       // dataType is not recognized
