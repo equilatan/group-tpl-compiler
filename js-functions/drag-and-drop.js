@@ -5,7 +5,6 @@ function setupDropZone() {
   // Get a reference to the CodeMirror instance
 
 
-  
   // Add an event listener for when the user drags a file over the drop-zone
   dropZone.addEventListener('dragover', function(e) {
     // Prevent the default behavior
@@ -32,8 +31,11 @@ function setupDropZone() {
     // Get the file that was dropped
     var file = e.dataTransfer.files[0];
 
-    // Check if the file is a text file
-    if (file.type == 'text/plain') {
+    // Get the file extension of the file
+    var fileExtension = file.name.split('.').pop();
+
+    // Check if the file is a Java file
+    if (fileExtension == 'java') {
       // Create a new FileReader
       var reader = new FileReader();
 
@@ -52,7 +54,7 @@ function setupDropZone() {
       // Read the file as text
       reader.readAsText(file);
     } else {
-      alert('File must be a text file!');
+      alert('File must be a Java file!');
     }
 
     
@@ -61,7 +63,7 @@ function setupDropZone() {
 
 // Set up the drop zone when the page loads
 setupDropZone();
-  
+
 // Set up the drop zone again if the user clicks the drop-zone element
 dropZone.addEventListener('click', function() {
   // Remove existing event listeners
