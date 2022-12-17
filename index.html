@@ -1,48 +1,139 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- Bootstrap -->
-        <link href = "css/bootstrap.min.css" rel = "stylesheet">
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.57.0/codemirror.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.57.0/codemirror.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.57.0/theme/material.min.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />    <title>Compiler</title>
+    <script src = dropzone2.js></script>
+  </head>
+
+
+  <body class="bg-dark">
+    <!-- container for the entire page -->
+    <div class="container-fluid bg-dark h-100 d-flex flex-column flex-row">
+      <div class="row flex-wrap">
+        <h1 data-text="COMPILELAB">COMPILELAB</h1>
+      </div>
+      <div class="row flex-wrap">
+        <!-- container for the left column -->
+        <div class="col-3 bg-dark dark">
+          <p class="text-center text-muted">Drag and drop a text file into the box below or select a file using the file input element:</p>
         
-    </head>
-    <body>
-
-        <div class = "container">
-            <div class="row">
-                <div class="col-xs-6 col-md-offset-3">
-                    <textarea id="inputStr" class = "form-control"></textarea>
-                    <!-- int i=2+2-3; -->
-                    <textarea class = "form-control" id="outputStr"></textarea>
-                    <br>
-                    <textarea id="token" cols="80" class = "form-control" rows = "3"></textarea>
-                    <button type = "button" class = "btn btn-primary" onclick="lexical_declaration()">Lexical</button>
-                    <textarea id="syntax" cols="80" class = "form-control" ></textarea>
-                    <button id="stx" type="button" onclick="syntax_declaration()" class = "btn btn-primary">Syntax </button>
-
-                    <textarea id="semantic" cols="80" class = "form-control" ></textarea>
-                    <button id="stx" type="button" onclick="semantic_declaration()" class = "btn btn-primary">Semantic</button>
-                </div>
-            </div>
+          <!-- custom file input -->
+          <div class="custom-file">
+            <input type="file" id="file-input" class="custom-file-input form-control-file" accept=".java">
+            <label class="custom-file-label bg-dark text-white" for="file-input">*.java</label>
+            <p class="text-center text-muted">or drop a file here:</p>
+          </div>
+          <script src = "js-functions/fileInput.js"></script>
+          <!-- container for the file drop zone -->
+          
+           <div id="drop-zone" >
+            <p class="text-white"><i class="fas fa-upload"></i></p>
+            
+          </div> 
+          <script src="js-functions/drag-and-drop.js"></script> 
         </div>
 
-
-        
-
         
 
 
+        <!-- container for the right column -->
+        <div class="col-9 p-0 m-0" >
+          <!-- Create a new div to display the file name -->
+          <div id="file-name-display" class="bg-secondary text-light px-3 py-2 d-flex align-items-center"></div>
+          <script>
+            // Get a reference to the input field and the div
+            var inputField = document.getElementById("file-input");
+            var displayDiv = document.getElementById("file-name-display");
+
+            // Listen for changes to the input field
+            inputField.addEventListener("change", function() {
+              // Get the selected file
+              var file = this.files[0];
+
+              // Update the div with the file name
+              displayDiv.innerHTML = file.name;
+            });
+          </script>
 
 
-<!-- 
-         algorithms 
-        <script src="lexical.js"></script>
-        <script src="syntax.js"></script>
-        <script src="semantic.js"></script> -->
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src = "https://code.jquery.com/jquery.js"></script>
+          <!-- container for the code editor -->
+          <div class="form-group mb-0">
+            <div class="w-100 p-0 m-0" id="input-editor">
+
+            </div>
+            <script src = "js-functions/codemir.js"></script>
+          </div>
+          <!-- container for the compiler buttons -->
+          <div class="form-group mb-0">
+            <button type="button" class="btn btn-primary" id="lexical" onclick="lexical()">Lexical</button>
+            <button type="button" class="btn btn-secondary" id="syntax" disabled onclick="syntax()">Syntax</button>
+            <button type="button" class="btn btn-secondary" id="semantic" disabled onclick="semantic()">Semantic</button>
+            <!-- <button type="button" class="btn btn-secondary" id="test" onclick="test()">test</button> -->
+            <button class="btn btn-secondary" onClick="window.location.reload();">Clear</button>
+            <script>
+              // function test(){
+              //   let s = getExpression();
+              // document.getElementById("output").innerHTML = s;
+              // }
+              
+
+            function clear() {
+              location.reload();
+            }
+
+            </script>
+
+            <!-- Create a button to save the text -->
+            <button type="button" class="btn btn-secondary"  id="save-button">Save</button>
+
+            <script src = "js-functions/fileSaver.js"></script>
+
+
+          </div>
+          <!-- container for the output textarea -->
+          <!-- <div class="form-group mb-0 h-100">
+            <textarea class="form-control w-100 p-0 m-0" id="output" readonly></textarea>
+          </div>  -->
       
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src = "js/bootstrap.min.js"></script>
-    </body>
-</html> 
+
+          <textarea readonly id="output" class="form-control" rows="10" cols="50" style="resize: vertical; overflow:scroll; overflow-x:hidden;"></textarea>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.1/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  
+    <script src="js-functions/lexical.js"></script>
+    <script src="js-functions/syntax.js"></script>
+    <script src="js-functions/semantic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+
+  </body>
+</html>
+
+
+ <!-- 
+  for the buttons 
+  <div class="form-group">
+          <button type="button" class="btn btn-primary" id="lexical">Lexical</button>
+          <button type="button" class="btn btn-secondary" id="syntax" disabled>Syntax</button>
+          <button type="button" class="btn btn-secondary" id="semantic" disabled>Semantic</button>
+        </div>
+      </form> -->

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Bootstrap -->
+        <link href = "css/bootstrap.min.css" rel = "stylesheet">
+        
+    </head>
+    <body>
+
+        <div class = "container">
+            <div class="row">
+                <div class="col-xs-6 col-md-offset-3">
+                    <textarea id="inputStr" class = "form-control"></textarea>
+                    <!-- int i=2+2-3; -->
+                    <textarea class = "form-control" id="outputStr"></textarea>
+                    <br>
+                    <textarea id="token" cols="80" class = "form-control" rows = "3"></textarea>
+                    <button type = "button" class = "btn btn-primary" onclick="lexical_declaration()">Lexical</button>
+                    <textarea id="syntax" cols="80" class = "form-control" ></textarea>
+                    <button id="stx" type="button" onclick="syntax_declaration()" class = "btn btn-primary">Syntax </button>
+
+                    <textarea id="semantic" cols="80" class = "form-control" ></textarea>
+                    <button id="stx" type="button" onclick="semantic_declaration()" class = "btn btn-primary">Semantic</button>
+                </div>
+            </div>
+        </div>
+
+
+        
+
+        
+
+
+
+
+<!-- 
+         algorithms 
+        <script src="lexical.js"></script>
+        <script src="syntax.js"></script>
+        <script src="semantic.js"></script> -->
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src = "https://code.jquery.com/jquery.js"></script>
+      
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src = "js/bootstrap.min.js"></script>
+    </body>
+</html> 
