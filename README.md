@@ -1,4 +1,4 @@
-<h3 align="center">View the application here: https://bit.ly/CompileLab-App</h3>
+<h3 align="center">View and Try the web application here: https://bit.ly/CompileLab-App</h3>
 
 ![1](https://user-images.githubusercontent.com/112079899/208247885-3db3dc51-baaf-4c7c-8fa0-ffd9989b6ab6.png)
 
