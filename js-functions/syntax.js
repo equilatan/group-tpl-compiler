@@ -70,7 +70,7 @@ function syntax(){
                 else printError("Expected <assignment_operator>, got " + token, line);
             }
             else if(varChange == 2){
-                if(token == "<value>"){
+                if(token == "<value>" || token == "<identifier>"){
                     varChange++;
                 }
                 else printError("Expected <value>, got " + token, line);
@@ -177,7 +177,7 @@ function syntax(){
                 else printError("Expected <assignment_operator> or <semicolon_delimiter>, got " + token, line);
             }
             else if(dataTypeDecl == 5){
-                if(token == "<value>"){
+                if(token == "<value>" || token == "<identifier>"){
                     dataTypeDecl=6;
                 }
                 else printError("Expected <value>, got " + token, line);

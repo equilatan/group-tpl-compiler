@@ -37,7 +37,7 @@ function semantic(){
             wrongSem++;
           }
           else{
-            outTemp += ("Value of "  + dataType + ": " + lexeme + " is Semantically Correct!" + "\n\n");
+            //outTemp += ("Value of "  + dataType + ": " + lexeme + " is Semantically Correct!" + "\n\n");
             isVar == false;
           }
         }
@@ -49,7 +49,7 @@ function semantic(){
             wrongSem++;
           }
           else{
-            outTemp += ("Variable Name " + lexeme + " is " + "Semantically Correct!" + "\n\n");
+            //outTemp += ("Variable Name " + lexeme + " is " + "Semantically Correct!" + "\n\n");
             isVar == false;
           }
         }
@@ -57,14 +57,16 @@ function semantic(){
     }
   }
 
-  outTemp += " Total Semantic Errors: " + wrongSem;
+  
   if(wrongSem != 0){
+    outTemp += " Total Semantic Errors: " + wrongSem;
     print3(outTemp);
     document.getElementById("semantic").disabled = true;
     document.getElementById("semantic").style.backgroundColor = "#dc3545";
     document.getElementById("semantic").style.color = white;
   }
   else{
+    outTemp += "The Program is Semantically Correct!";
     print3(outTemp);
     document.getElementById("semantic").disabled = false;
     document.getElementById("semantic").style.backgroundColor = "#32CD32";
@@ -94,6 +96,8 @@ function checkValue(dataType, value) {
     case "char":
       isValid = /^'([^']?)'$/.test(value);
       break;
+    case "boolean":
+      isValid = (value == "true" || value == "TRUE" || value == "false" || value == "FALSE");
     default:
       // dataType is not recognized
       break;

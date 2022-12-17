@@ -1,4 +1,4 @@
-// var inputArr = {}; //global variables for tokens/lexemes
+
 
 var keywords;
 var operators;
@@ -105,8 +105,9 @@ function lexical(){
     let tokens = {};
     for(let i = 0 ; i < trimmedLines.length ; i++){
         
-        lexemes[i] = lexical2(trimmedLines[i]).filter(str => str !== "");
-        tokens[i] = getTokens2(lexemes[i]).filter(str => str !== "");
+        lexemes[i] = separateLexemes
+    (trimmedLines[i]).filter(str => str !== "");
+        tokens[i] = getTokens(lexemes[i]).filter(str => str !== "");
     
          //outTemp += ("The line is " + (i+1) + "\n" + lexemes[i] + "\n" + tokens[i] + "\n\n\n");
          for(let j = 0; j < lexemes[i].length ; j++){
@@ -124,7 +125,7 @@ function lexical(){
     
 }  
 
-function lexical2(expressions){
+function separateLexemes(expressions){
 
     initTokens();
  
@@ -285,7 +286,7 @@ function lexical2(expressions){
 
 
 let initChk=false;
-function getTokens2(lexemeArr){
+function getTokens(lexemeArr){
     // Create a new object
     let lexemeDict = {};
     let ctr=0;
@@ -312,7 +313,7 @@ function getTokens2(lexemeArr){
     else if (keywords.objects.includes(lexeme))
         temp = "<object>";
     else if (keywords.booleans.includes(lexeme))
-        temp = "<boolean>";
+        temp = "<value>";
     else if (keywords.references.includes(lexeme))
         temp = "<reference>";
     else if (keywords.control_structures.includes(lexeme))
@@ -390,8 +391,6 @@ function getTokens2(lexemeArr){
     //tempOutput += ("(" + ctr + ") >>> " + lexeme + " >>> " + lexemeDict[lexeme] + "\n");
 
     tempOutput += lexemeDict[lexeme] + "&&&";
-    //lexemeDictGlobal[ctr-1] = lexeme;
-    //tokenDictGlobal[ctr-1] = lexemeDict[lexeme];
     
     }
     
