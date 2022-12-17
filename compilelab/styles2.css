@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
+* {
+    font-family: 'Jost', sans-serif;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: poppins;
+	background-color: #141417;
+	height: 100vh;
+}
+
+a {
+	font-size: 12px;
+}
+
+/*Top Navigation*/
+.nav-area {
+	background: #1F2024;
+}
+.nav-area:after {
+	content: '';
+	clear: both;
+	display: block;
+}
+.nav-area ul {
+	list-style: none;
+	margin: 0;
+}
+.nav-area>ul>li {
+	float: left;
+	position: relative;
+}
+.nav-area ul li a {
+	text-decoration: none;
+	color: #fff;
+	padding: 15px 20px;
+	display: block;
+}
+.nav-area ul li:hover a {
+	background: #292A2E ;
+}
+.nav-area ul ul {
+	position: absolute;
+	padding: 0;
+	min-width: 160px;
+	display: none;
+	top: 100%;
+	left: 0;
+}
+.nav-area ul li:hover>ul {
+	display: block;
+    float: left;
+
+}
+.nav-area ul ul li:hover a {
+	background: #262626;
+}
+.nav-area ul ul li {
+	position: relative;
+}
+.nav-area ul ul ul {
+	top: 0;
+	left: 100%;
+}
+.nav-area ul ul ul li:hover a {
+	background: #34495e;
+}
+
+/*Sidebar*/
+.left-side {
+    background-color: #1F2024;
+    width: 65px;
+    height: 100%;
+    float: left;
+}
+
+.le {
+    background-color: #27282E;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #444444;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 60px;
+    left: 8px;
+}
+
+.sy {
+    background-color: #27282E;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #444444;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 130px;
+    left: 8px;
+}
+
+.se {
+    background-color: #27282E;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #444444;
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 200px;
+    left: 8px;
+}
+
+.drag-drop {
+    transform: rotate(-90deg);
+    background-color: #27282E;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    height: 30px;
+    width: 300px;
+    position: absolute;
+    top: 400px;
+    left: -127px;
+}
+
+textarea {
+  flex:1;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+#file-name-display {
+  /* set the height of the file-name-display div */
+  height: 30px;
+}
+
+#input-editor, #output {
+  /* make the input-editor and output divs take up an equal amount of space */
+  flex-grow: 1;
+}
+
+#output {
+  background-color: black;
+}
