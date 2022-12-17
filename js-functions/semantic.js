@@ -32,7 +32,7 @@ function semantic(){
           // outTemp += lexeme + " ";
           // outTemp += (checkValue(dataType, lexeme) + "\n");
           if(checkValue(dataType, lexeme) == false){
-            outTemp += ("Value of " + dataType + ": " + lexeme + "is Semantically Incorrect." + "\n\n");
+            outTemp += ("Value of " + dataType + ": " + lexeme + " is Semantically Incorrect." + "\n\n");
             isVar == false;
             wrongSem++;
           }
@@ -86,7 +86,7 @@ function checkValue(dataType, value) {
       break;
     case "double":
     case "float":
-      isValid = /^\d+(\.\d+)?$/.test(value);
+      isValid = /^\d*\.\d+$/.test(value);
       break;
     case "String":
       isValid = /^"([^"]*)"$/.test(value);
