@@ -28,15 +28,21 @@ function semantic(){
 
       if(isVar==true){
         if (token == "<value>"){
-          outTemp += lexeme + " ";
-          outTemp += (checkValue(dataType, lexeme) + "\n");
-          isVar == false;
+          // outTemp += lexeme + " ";
+          // outTemp += (checkValue(dataType, lexeme) + "\n");
+          if(checkValue(dataType, value) == false){
+            print3(dataType + ": " + value + ">>>" + "Semantically Incorrect.");
+            isVar == false;
+          }
+          else{
+            print3(dataType + ": " + value + ">>>" + "Semantically Correct!");
+            isVar == false;
+          }
+          
         }
       }
     }
   }
-
-  print3(outTemp + "\n");
 }
 
 function checkValue(dataType, value) {
