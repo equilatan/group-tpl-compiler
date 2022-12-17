@@ -1,7 +1,8 @@
 public class Main{
 
-	public static void main(String[] args){
+	public static void main(String[] args)
 	
-		System.out.println("Bruh");
-	}}d
-}
+		int i = 0;
+        double y "bruh";
+	}
+

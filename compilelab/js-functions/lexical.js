@@ -5,92 +5,6 @@ var operators;
 var delimiters;
 
              
-            
-function lexical(){
-
-    initTokens();
-    let expressions = getExpression();
-
-
- 
-    let tokens = [];
-
-    let currentToken = "";
-    let inString = false;
-
-    let keywordsArray = [];
-    
-    for (const key in keywords) {
-        keywordsArray.push(...keywords[key]);
-    }
-
-    let operatorsArray = [];
-    for (const key in operators) {
-        operatorsArray.push(...operators[key]);
-    }
-
-    let delimitersArray = [];
-    for (const key in delimiters) {
-        delimitersArray.push(...delimiters[key]);
-    }
-
-    for (let i = 0; i < expressions.length; i++) {
-
-        let char = expressions.charAt(i);
-
-        if (char === "\"" && !inString) {
-            // Start of string
-            inString = true;
-            currentToken += char;
-        } else if (char === "\"" && inString) {
-            // End of string
-            inString = false;
-            currentToken += char;
-            tokens.push(currentToken);
-            currentToken = "";
-        } 
-        
-        else if (operatorsArray.includes(char) && !inString) {
-            // Operator
-            if (currentToken) {
-                tokens.push(currentToken);
-            }
-            tokens.push(char);
-            currentToken = "";
-        } else if(delimitersArray.includes(char) && !inString) {
-            // Delimiter
-            if (currentToken) {
-                tokens.push(currentToken);
-            }
-            tokens.push(char);
-            currentToken = "";
-        } else if (keywordsArray.includes(currentToken + char) && !inString) {
-            // Keyword
-            currentToken += char;
-            
-            tokens.push(currentToken);
-            currentToken = "";
-        }
-        else if(char === " " && !inString){
-            continue;
-        } 
-        else {
-            // Part of a token
-            currentToken += char;
-        }
-    }
-
-
-    if (currentToken) {
-        tokens.push(currentToken);
-    }
-
-    let noWhitespace = tokens.map(str => str.trim());
-    // let noEmpty = noWhitespace.filter(str => str.trim() != "");
-
-    getTokens(noWhitespace);
-
-}
 
 function print(s){
     //document.getElementById("output").textContent += s;
@@ -123,102 +37,10 @@ function getExpression(){
   }
  
 
-
-
-
-
-function getTokens(lexemeArr){
-        // Create a new object
-        let lexemeDict = {};
-        let ctr=0;
-        let tempOutput = "";
-        let temp;
-        // Loop through the lexemes in the trimmed2 array
-        for (let lexeme of lexemeArr) {
-        
-        // for keywords
-        if (keywords.access_modifiers.includes(lexeme))
-            temp = "<access_modifier>";
-        else if (keywords.classes.includes(lexeme))
-            temp = "<class>";
-        else if (keywords.data_types.includes(lexeme))
-            temp = "<data_type>";
-        else if (keywords.loops.includes(lexeme))
-            temp = "<loop>";
-        else if (keywords.objects.includes(lexeme))
-            temp = "<object>";
-        else if (keywords.booleans.includes(lexeme))
-            temp = "<boolean>";
-        else if (keywords.references.includes(lexeme))
-            temp = "<reference>";
-        else if (keywords.control_structures.includes(lexeme))
-            temp = "<control_structure>";
-        else if (keywords.exceptions.includes(lexeme))
-            temp = "<exception>";
-        else if (keywords.arrays.includes(lexeme))
-            temp = "<array>";
-                
-        //for operators
-        else if (operators.arithmetic.includes(lexeme))
-            temp = "<arithmetic_operator>";
-        else if (operators.assignment.includes(lexeme))
-            temp = "<assignment_operator>";
-        else if (operators.comparison.includes(lexeme))
-            temp = "<comparison_operator>";
-        else if (operators.logical.includes(lexeme))
-            temp = "<logical_operator>";
-        else if (operators.conditional.includes(lexeme))
-            temp = "<conditional_operator>";
-        else if (operators.incDcr.includes(lexeme))
-            temp = "<increment_decrement_operator>";
-
-        //for delimiters
-        else if (delimiters.lparen.includes(lexeme))
-            temp = "<left_parenthesis_delimiter>";
-        else if (delimiters.rparen.includes(lexeme))
-            temp = "<right_parenthesis_delimiter>";
-        else if (delimiters.lbracket.includes(lexeme))
-            temp = "<left_bracket_delimiter>";
-        else if (delimiters.rbracket.includes(lexeme))
-            temp = "<right_bracket_delimiter>";
-        else if (delimiters.lbrace.includes(lexeme))
-            temp = "<left_brace_delimiter>";
-        else if (delimiters.rbrace.includes(lexeme))
-            temp = "<right_brace_delimiter>";
-        else if (delimiters.comma.includes(lexeme))
-            temp = "<comma_delimiter>";
-        else if (delimiters.semicolon.includes(lexeme))
-            temp = "<semicolon_delimiter>";
-        else if (delimiters.comments.includes(lexeme))
-            temp = "<comment>";
-        else if (delimiters.dotDelim.includes(lexeme))
-            temp = "<dot_delimiter>";
-
-
-        else if(lexeme.includes('"'))
-            temp = "<value>";
-        else temp = "<identifier>";
-        
-        // store temp value to the key
-        lexemeDict[lexeme] = temp;
-    
-        // inputArr[ctr] = lexemeDict;  
-        ctr++;
-        tempOutput += ("(" + ctr + ") >>> " + lexeme + " >>> " + lexemeDict[lexeme] + "\n");
-
-        lexemeDictGlobal[ctr-1] = lexeme;
-        tokenDictGlobal[ctr-1] = lexemeDict[lexeme];
-        
-        }
-        
-        print(tempOutput);
-}
-
-
-
 function initTokens(){
     keywords = {
-        access_modifiers: ["public", "private", "protected", "static"],
+        access_modifiers: ["public", "private", "protected"],
+        static_modifier: ["static"],
         classes: ["class"],
         data_types: ["int", "float", "double", "boolean", "char", "String", "void"],
         loops: ["while", "for", "do-while"],
@@ -231,7 +53,8 @@ function initTokens(){
       };
       operators = {
         arithmetic: ["+", "-", "*", "/", "%"],
-        assignment: ["=", "+=", "-=", "*=", "/=", "%="],
+        assignment: ["="],
+        arit_assignment: ["+=", "-=", "*=", "/=", "%="],
         comparison: ["==", "!=", ">", "<", ">=", "<="],
         logical: ["&&", "||", "!"],
         conditional: ["?:"],
@@ -246,7 +69,7 @@ function initTokens(){
         rbrace: ["}"],
         comma: [","],
         semicolon: [";"],
-        dotDelim: ["."],
+        //dotDelim: ["."],
         comments: ["//", "/*", "*/"]
       };     
 }
@@ -257,8 +80,10 @@ var tokenDictGlobal = {};
 
 
 
-function try2(){
+function lexical(){
 
+    lexemeDictGlobal = {};
+    tokenDictGlobal = {};
     var s = inputEditor.getValue();
     
     let lines = s.split("\n");
@@ -282,7 +107,10 @@ function try2(){
     // something wrong with lexemes
     lexemeDictGlobal = lexemes;
     tokenDictGlobal = tokens;
-     print(outTemp);
+
+    outTemp += "\n  There are " + unknownCtr + " unknown tokens found in the program."; 
+    unknownCtr = 0;
+    print(outTemp);
 }  
 
 function lexical2(expressions){
@@ -300,6 +128,12 @@ function lexical2(expressions){
         keywordsArray.push(...keywords[key]);
     }
 
+    let arithmeticArray = [];
+    arithmeticArray = operators.arithmetic;
+
+    let comparisonArray = [];
+    comparisonArray = operators.comparison;
+
     let operatorsArray = [];
     for (const key in operators) {
         operatorsArray.push(...operators[key]);
@@ -309,7 +143,7 @@ function lexical2(expressions){
     for (const key in delimiters) {
         delimitersArray.push(...delimiters[key]);
     }
-
+    let symbols = currentToken.match(/[^a-zA-Z0-9 ]/g);
     for (let i = 0; i < expressions.length; i++) {
 
         let char = expressions.charAt(i);
@@ -325,9 +159,70 @@ function lexical2(expressions){
             tokens.push(currentToken);
             currentToken = "";
         } 
-        
-        else if (operatorsArray.includes(char) && !inString) {
+        else if(char == "'" && expressions.charAt(i+2) == "'"){
+            currentToken += expressions.charAt(i+1);
+            tokens.push("'" + currentToken + "'" );
+            currentToken = "";
+            i+=2;
+            continue;
+        }
+        else if(expressions.charAt(i+1) == "[" && expressions.charAt(i+2) == "]"){
+            currentToken += char;
+            tokens.push(currentToken + "[" +  "]");
+            currentToken = "";
+            i+=2;
+            continue;
+        }
+        else if (arithmeticArray.includes(char) && !inString) {
             // Operator
+
+            if(expressions.charAt(i+1) == "="){
+                //tokens.push(char + "=");
+                if (currentToken) {
+                    tokens.push(currentToken);
+                }
+                aritTemp = char;
+                i++;
+                char += expressions.charAt(i);
+                tokens.push(char);
+                currentToken = "";
+
+            }
+            else{
+                if (currentToken) {
+                    tokens.push(currentToken);
+                }
+                tokens.push(char);
+                currentToken = "";
+            }
+            
+        } 
+        else if ((char == "<" || char == ">" || char == "=" || char == "!") && !inString) {
+            // Operator
+
+            if(expressions.charAt(i+1) == "="){
+                //tokens.push(char + "=");
+                if (currentToken) {
+                    tokens.push(currentToken);
+                }
+                aritTemp = char;
+                i++;
+                char += expressions.charAt(i);
+                tokens.push(char);
+                currentToken = "";
+
+            }
+            else{
+                if (currentToken) {
+                    tokens.push(currentToken);
+                }
+                tokens.push(char);
+                currentToken = "";
+            }
+            
+        }
+        else if(operatorsArray.includes(char) && !inString) {
+            // Delimiter
             if (currentToken) {
                 tokens.push(currentToken);
             }
@@ -347,9 +242,17 @@ function lexical2(expressions){
             tokens.push(currentToken);
             currentToken = "";
         }
-        else if(char === " " && !inString){
-            continue;
-        } 
+        
+        else if(/^[^a-zA-Z0-9\.]+$/.test(char) && !inString){
+            currentToken += char;
+            tokens.push(currentToken);
+            currentToken = "";
+        }
+        else if(char === " " && !inString && /^[a-zA-Z0-9 ]+$/.test(currentToken)){
+            currentToken += char;
+            tokens.push(currentToken);
+            currentToken = "";
+        }
         else {
             // Part of a token
             currentToken += char;
@@ -368,6 +271,9 @@ function lexical2(expressions){
 
 }
 
+
+
+let initChk=false;
 function getTokens2(lexemeArr){
     // Create a new object
     let lexemeDict = {};
@@ -375,6 +281,8 @@ function getTokens2(lexemeArr){
     let tempOutput = "";
     let temp;
 
+   initChk=false;
+    
     let tempArr = [];
     // Loop through the lexemes in the trimmed2 array
     for (let lexeme of lexemeArr) {
@@ -382,6 +290,8 @@ function getTokens2(lexemeArr){
     // for keywords
     if (keywords.access_modifiers.includes(lexeme))
         temp = "<access_modifier>";
+    else if (keywords.static_modifier.includes(lexeme))
+        temp = "<static_modifier>";
     else if (keywords.classes.includes(lexeme))
         temp = "<class>";
     else if (keywords.data_types.includes(lexeme))
@@ -399,13 +309,22 @@ function getTokens2(lexemeArr){
     else if (keywords.exceptions.includes(lexeme))
         temp = "<exception>";
     else if (keywords.arrays.includes(lexeme))
-        temp = "<array>";
+        temp = "<data_type>";
             
     //for operators
-    else if (operators.arithmetic.includes(lexeme))
+    else if (operators.arithmetic.includes(lexeme)){
         temp = "<arithmetic_operator>";
-    else if (operators.assignment.includes(lexeme))
+        initChk=true;
+    }
+    else if (operators.assignment.includes(lexeme)){
         temp = "<assignment_operator>";
+        initChk=true;
+    }
+    else if (operators.arit_assignment.includes(lexeme)){
+        temp = "<arithmetic_assignment_operator>";
+        initChk=true;
+    }
+        
     else if (operators.comparison.includes(lexeme))
         temp = "<comparison_operator>";
     else if (operators.logical.includes(lexeme))
@@ -430,17 +349,27 @@ function getTokens2(lexemeArr){
         temp = "<right_brace_delimiter>";
     else if (delimiters.comma.includes(lexeme))
         temp = "<comma_delimiter>";
-    else if (delimiters.semicolon.includes(lexeme))
+    else if (delimiters.semicolon.includes(lexeme)){
         temp = "<semicolon_delimiter>";
+        initChk = false;
+    }
+        
     else if (delimiters.comments.includes(lexeme))
         temp = "<comment>";
-    else if (delimiters.dotDelim.includes(lexeme))
-        temp = "<dot_delimiter>";
+    // else if (delimiters.dotDelim.includes(lexeme))
+    //     temp = "<dot_delimiter>";
 
 
-    else if(lexeme.includes('"'))
+    else if(lexeme.includes('"') || (initChk == true && /^[0-9]+(\.[0-9]+)?$/.test(lexeme)) || /^[^']*'[^']*'[^']*$/.test(lexeme))
         temp = "<value>";
-    else temp = "<identifier>";
+    else if(/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(lexeme)){
+        temp = "<identifier>";
+    }
+    else{
+        temp = "<unknown_token>";
+        unknownCtr++;
+    }
+    
     
     // store temp value to the key
     lexemeDict[lexeme] = temp;
@@ -459,3 +388,5 @@ function getTokens2(lexemeArr){
     //print(tempArr);
     return tempArr;
 }
+
+var unknownCtr = 0;
