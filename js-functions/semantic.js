@@ -4,6 +4,7 @@
 function semantic(){
   var numLines = Object.keys(tokenDictGlobal).length;
   let outTemp = "";
+  let wrongSem = 0;
   for(let line = 0; line < numLines; line++){
     let tokens = tokenDictGlobal[line];
     let lexemes = lexemeDictGlobal[line];
@@ -30,12 +31,13 @@ function semantic(){
         if (token == "<value>"){
           // outTemp += lexeme + " ";
           // outTemp += (checkValue(dataType, lexeme) + "\n");
-          if(checkValue(dataType, value) == false){
-            print3(dataType + ": " + value + ">>>" + "Semantically Incorrect.");
+          if(checkValue(dataType, lexeme) == false){
+            outTemp += (dataType + ": " + lexeme + ">>>" + "Semantically Incorrect." + "\n\n");
             isVar == false;
+            wrongSem++;
           }
           else{
-            print3(dataType + ": " + value + ">>>" + "Semantically Correct!");
+            outTemp += (dataType + ": " + lexeme + ">>>" + "Semantically Correct!" + "\n\n");
             isVar == false;
           }
           
@@ -43,6 +45,26 @@ function semantic(){
       }
     }
   }
+
+  outTemp += " Total Semantic Errors: " + wrongSem;
+  if(wrongSem != 0){
+    print3(outTemp);
+    document.getElementById("semantic").disabled = true;
+    document.getElementById("semantic").style.backgroundColor = "#dc3545";
+    document.getElementById("semantic").style.color = white;
+  }
+  else{
+    print3(outTemp);
+    document.getElementById("semantic").disabled = false;
+    document.getElementById("semantic").style.backgroundColor = "#32CD32";
+    document.getElementById("semantic").style.color = black;
+
+  }
+
+
+  wrongSem=0;
+  
+
 }
 
 function checkValue(dataType, value) {
@@ -75,10 +97,5 @@ function print3(s){
     document.getElementById("output").innerHTML = s;
     document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
 
-    if(s != ""){
-        document.getElementById("semantic").disabled = false;
-        document.getElementById("semantic").style.backgroundColor = "#32CD32";
-        document.getElementById("semantic").style.color = black;
-    }
     
 }
