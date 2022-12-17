@@ -205,6 +205,7 @@ function syntax(){
           } 
 
           if(classDecl == 4 && token == "<right_brace_delimiter>" && methodDecl == 0){
+            classDecl == 0;
             rbrace_ctr++;
             continue;
           }
@@ -212,6 +213,8 @@ function syntax(){
           if(token == "<semicolon_delimiter>"){
             semicolonAll++;
           }
+
+          
         }
 
         
