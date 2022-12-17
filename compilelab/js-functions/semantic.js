@@ -33,9 +33,6 @@ function semantic(){
           isVar == false;
         }
       }
-      
-      
-
     }
   }
 

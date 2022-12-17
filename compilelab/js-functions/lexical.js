@@ -11,12 +11,20 @@ function print(s){
     document.getElementById("output").innerHTML = s;
     document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
 
-    if(s != ""){
+
+    if(unknownCtr != 0){
+        document.getElementById("syntax").disabled = true;
+        document.getElementById("lexical").style.backgroundColor = "#dc3545";
+        document.getElementById("lexical").style.color = white;
+    }
+    else if(unknownCtr == 0 && s != ""){
         document.getElementById("syntax").disabled = false;
         document.getElementById("lexical").style.backgroundColor = "#32CD32";
         document.getElementById("lexical").style.color = black;
-
     }
+
+    unknownCtr = 0;
+   
     
 }
 
@@ -75,8 +83,8 @@ function initTokens(){
 }
 
 
-var lexemeDictGlobal = {};
-var tokenDictGlobal = {};
+let lexemeDictGlobal = {};
+let tokenDictGlobal = {};
 
 
 
@@ -84,6 +92,8 @@ function lexical(){
 
     lexemeDictGlobal = {};
     tokenDictGlobal = {};
+    unknownCtr = 0;
+    
     var s = inputEditor.getValue();
     
     let lines = s.split("\n");
@@ -104,13 +114,14 @@ function lexical(){
          }
          
     }
-    // something wrong with lexemes
+
     lexemeDictGlobal = lexemes;
     tokenDictGlobal = tokens;
 
     outTemp += "\n  There are " + unknownCtr + " unknown tokens found in the program."; 
-    unknownCtr = 0;
+    
     print(outTemp);
+    
 }  
 
 function lexical2(expressions){

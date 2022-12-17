@@ -231,36 +231,52 @@ function syntax(){
     }
     else if(lbrace_ctr > rbrace_ctr){
         print2("Syntax Error: Missing '}' at the end of the program.")
-        errorChk=false;
     }
     else if(semicolonAll > semicolonCtr){
         print2("Extra <semicolon_delimiter> at the end of the statement.");
-        errorChk=false;
     }
     else if(lbrace_ctr < rbrace_ctr){
         print2("Syntax Error: Extra '}' at the end of the program.")
-        errorChk=false;
     }
     else if(methodDecl != 0){
         print2("Syntax Error: Expected method declaration.")
-        errorChk=false;
     }
     else if(classDecl != 4){
         print2("Syntax Error: Expected class declaration.")
-        errorChk=false;
     }
     else if(dataTypeDecl != 0){
         print2("Syntax Error: Variable declaration is incomplete.")
-        errorChk=false;
     }
     else if(varChange !=0){
         print2("Syntax Error: Variable initialization is incomplete.")
-        errorChk=false;
     }
     else print2("Syntax is Correct!");
     
+    if(document.getElementById("output").innerHTML == "Syntax is Correct!"){
+        print2("Syntax is Correct!");
+        document.getElementById("semantic").disabled = false;
+        document.getElementById("syntax").style.backgroundColor = "#32CD32";
+        document.getElementById("syntax").style.color = black;
+    }
+    else{
+        document.getElementById("syntax").disabled = true;
+        document.getElementById("syntax").style.backgroundColor = "#dc3545";
+        document.getElementById("syntax").style.color = white;
+    }
+
+    // if(errorChk==true){
+    //     document.getElementById("syntax").disabled = true;
+    //     document.getElementById("syntax").style.backgroundColor = "#dc3545";
+    //     document.getElementById("syntax").style.color = white;
+    // }
+    // else{
+    //     print2("Syntax is Correct!");
+    //     document.getElementById("semantic").disabled = false;
+    //     document.getElementById("syntax").style.backgroundColor = "#32CD32";
+    //     document.getElementById("syntax").style.color = black;
+    // }
     
-        
+    // errorChk=false;
 }
 
 function printError(errorMsg,lineAt){
@@ -273,11 +289,12 @@ function printError(errorMsg,lineAt){
 function print2(s){
     document.getElementById("output").innerHTML = s;
     document.getElementById("output").scrollTop = document.getElementById("output").scrollHeight;
-
-    if(s != ""){
-        document.getElementById("semantic").disabled = false;
-        document.getElementById("syntax").style.backgroundColor = "#32CD32";
-        document.getElementById("syntax").style.color = black;
-    }
+    
+    
+    // else if(unknownCtr == 0 && s != ""){
+    //     document.getElementById("syntax").disabled = false;
+    //     document.getElementById("lexical").style.backgroundColor = "#32CD32";
+    //     document.getElementById("lexical").style.color = black;
+    // }
     
 }
