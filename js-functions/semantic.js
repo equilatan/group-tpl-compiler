@@ -32,15 +32,26 @@ function semantic(){
           // outTemp += lexeme + " ";
           // outTemp += (checkValue(dataType, lexeme) + "\n");
           if(checkValue(dataType, lexeme) == false){
-            outTemp += (dataType + ": " + lexeme + ">>>" + "Semantically Incorrect." + "\n\n");
+            outTemp += ("Value of " + dataType + ": " + lexeme + "is Semantically Incorrect." + "\n\n");
             isVar == false;
             wrongSem++;
           }
           else{
-            outTemp += (dataType + ": " + lexeme + ">>>" + "Semantically Correct!" + "\n\n");
+            outTemp += ("Value of "  + dataType + ": " + lexeme + " is Semantically Correct!" + "\n\n");
             isVar == false;
           }
-          
+        }
+        else if(token == "<identifier>"){
+
+          if(/^[a-zA-Z][a-zA-Z0-9_-]*$/.test(lexeme) == false){
+            outTemp += ("Variable Name " + lexeme + " is " + "Semantically Incorrect." + "\n\n");
+            isVar == false;
+            wrongSem++;
+          }
+          else{
+            outTemp += ("Variable Name " + lexeme + " is " + "Semantically Correct!" + "\n\n");
+            isVar == false;
+          }
         }
       }
     }
